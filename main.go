@@ -21,12 +21,13 @@ func main() {
 		log.Fatal(err)
 	}
 	ud = flag.String("d", cwd+"/html/upload", "Upload directory")
+	port := flag.String("p", ":8093", "Listening port")
 	flag.Parse()
 
 	http.Handle("/", http.FileServer(http.Dir("html")))
 	http.HandleFunc("/upload", handler_upload)
 
-	err = http.ListenAndServe(":8080", nil)
+	err = http.ListenAndServe(*port, nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
