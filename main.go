@@ -46,6 +46,10 @@ func handler_upload(w http.ResponseWriter, r *http.Request) {
 	}
 
 	file, handler, err := r.FormFile("file")
+	if err != nil {
+		log.Println(err)
+		return
+	}
 	mimetype := handler.Header.Get("Content-Type")
 
 	switch mimetype {
